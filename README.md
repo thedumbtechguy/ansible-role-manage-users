@@ -5,7 +5,8 @@ An ansible role to manage users on linux hosts.
 ## Requirements
 
 Requires a custom `authorized_keys` location (`/etc/ssh/authorized_keys/`) to be setup.
-You can configure this using the Todo: link to server_setup role.
+
+You can configure this using the [thedumbtechguy.server-setup](https://galaxy.ansible.com/thedumbtechguy/server-setup/) role.
 
 > This role has been tested on `Ubuntu 16.04` and `Ubuntu 16.10` only.
 
