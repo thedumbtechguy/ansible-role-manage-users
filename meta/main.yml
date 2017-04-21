@@ -1,0 +1,20 @@
+---
+
+
+dependencies: []
+
+galaxy_info:
+  author: TheDumbTechGuy
+  description: Manage users on Linux.
+  company: "Half Tree Labs"
+  license: "license (BSD, MIT)"
+  min_ansible_version: 2.0
+  platforms:
+    - name: Ubuntu
+      versions:
+      - 16.04
+      - 16.10
+  galaxy_tags:
+    - users
+    - ssh
+    - sudo

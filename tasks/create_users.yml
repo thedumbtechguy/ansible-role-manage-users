@@ -1,0 +1,38 @@
+---
+
+- name: create user 
+  user:
+    name: "{{ item.username }}"
+    password: "{{ item.password }}"
+    shell: /bin/bash
+  become: true
+  with_items: '{{ users }}'
+  no_log: true
+
+- name: create ssh authorized keys file
+  file:
+    path: '/etc/ssh/authorized_keys/{{ item.username }}'
+    state: touch
+    owner: root
+    group: root
+    mode: 0644
+  become: true
+  with_items: '{{ users }}'
+
+- name: add authorized key 
+  authorized_key: 
+    user: '{{ item.username }}' 
+    key: '{{ item.public_key }}'
+    path: '/etc/ssh/authorized_keys/{{ item.username }}'
+    manage_dir: no
+  become: true
+  when:
+    - "item.use_ssh|default('False')|bool == True"
+  with_items: '{{ users }}'
+
+- name: remove authorized keys
+  shell: 'cat /dev/null > /etc/ssh/authorized_keys/{{ item.username }}'
+  become: true
+  when:
+    - "item.use_ssh|default('False')|bool == False"
+  with_items: '{{ users }}'

@@ -1,0 +1,23 @@
+---
+
+- name: add user to sudoers
+  lineinfile: 
+    dest: /etc/sudoers
+    insertafter: EOF
+    line: "{{ item.username }} {% if item.sudo is defined %}{{ item.sudo.hosts | default('ALL') }}=({{ item.sudo.users | default('ALL') }}:{{ item.sudo.groups | default('ALL') }}) {{ item.sudo.commands | default('ALL') }}{% else %}ALL=(ALL:ALL) ALL{% endif %}"
+    regexp: '^{{ item.username }} .*'
+    state: present  
+  when: 
+    - "item.use_sudo|default('False')|bool == True"
+  become: true
+  with_items: '{{ users }}'
+  
+- name: remove user from sudoers
+  lineinfile: 
+    dest: /etc/sudoers
+    regexp: '^{{ item.username }} .*'
+    state: absent  
+  when: 
+    - "item.use_sudo|default('False')|bool == False"
+  become: true
+  with_items: '{{ users }}'
