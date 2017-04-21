@@ -1,6 +1,6 @@
 # Ansible Role: Manage Users
 
-This role creates a list of users on the host.
+An ansible role to manage users on linux hosts.
 
 ## Requirements
 
@@ -51,7 +51,7 @@ You can configure this using the Todo: link to server_setup role.
           users: ALL
           commands: ALL
   roles:
-    - thedumbtechguy.manage_users
+    - thedumbtechguy.manage-users
 ```
 
 
