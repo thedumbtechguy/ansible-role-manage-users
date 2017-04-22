@@ -1,5 +1,4 @@
 ---
 # A default empty list of users
 
-users:
-  - thedumbtechguy.server-setup
+users: []
