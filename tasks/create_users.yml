@@ -18,6 +18,7 @@
     mode: 0644
   become: true
   with_items: '{{ users }}'
+  no_log: true
 
 - name: add authorized key 
   authorized_key: 
@@ -29,6 +30,7 @@
   when:
     - "item.use_ssh|default('False')|bool == True"
   with_items: '{{ users }}'
+  no_log: true
 
 - name: remove authorized keys
   shell: 'cat /dev/null > /etc/ssh/authorized_keys/{{ item.username }}'
@@ -36,3 +38,4 @@
   when:
     - "item.use_ssh|default('False')|bool == False"
   with_items: '{{ users }}'
+  no_log: true

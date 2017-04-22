@@ -11,6 +11,7 @@
     - "item.use_sudo|default('False')|bool == True"
   become: true
   with_items: '{{ users }}'
+  no_log: true
   
 - name: remove user from sudoers
   lineinfile: 
@@ -21,3 +22,4 @@
     - "item.use_sudo|default('False')|bool == False"
   become: true
   with_items: '{{ users }}'
+  no_log: true
