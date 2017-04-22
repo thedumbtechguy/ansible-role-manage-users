@@ -17,18 +17,20 @@ You can configure this using the [thedumbtechguy.server-setup](https://galaxy.an
   - Example
     ```yaml
     users:
-      - username: *username
-        password: *"someencryptedvalue"
-        use_ssh: false
-        public_key: private key string or url
-        use_sudo: false
+      - username: username # required
+        password: 'encryptedpassword' # optional. omitted if not provided
+        use_ssh: false # optional. defaults to false
+        public_key: 'key url or contents' # required when 'use_ssh' is true
+        use_sudo: false # optional. defaults to false
         sudo:
-          hosts: ALL
-          groups: ALL
-          users: ALL
-          commands: ALL
+          hosts: ALL # optional. defaults to 'ALL'
+          groups: ALL # optional. defaults to 'ALL'
+          users: ALL # optional. defaults to 'ALL'
+          commands: ALL # optional. defaults to 'ALL'. for passwordless sudo, use 'NOPASSWD: ALL'
     ```
     > **Note**: Password should be an encrypted value compatible with the [ansible user module](http://docs.ansible.com/ansible/user_module.html).
+    >
+    >  You can create one using: `python -c 'import crypt; print crypt.crypt("This is the password", "$1$ThisIsSomeSalt$")'`
 
 
 ## Usage Example
